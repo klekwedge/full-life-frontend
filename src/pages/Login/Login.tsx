@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import {Link} from 'react-router-dom'
 
-export default function Login() {
+export function Login() {
   return (
     <Flex
       minH={"100vh"}

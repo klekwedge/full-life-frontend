@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 
-export default function Registration() {
+export function Registration() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
