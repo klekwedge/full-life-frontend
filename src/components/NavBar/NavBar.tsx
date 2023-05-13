@@ -23,6 +23,8 @@ import {
   MenuItem,
   Center,
   useColorMode,
+  HStack,
+  VStack,
 } from "@chakra-ui/react";
 
 import { Route, Link as RouterLink } from "react-router-dom";
@@ -131,34 +133,42 @@ export default function NavBar() {
 
             <Menu>
               <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
+                py={2}
+                transition="all 0.3s"
+                _focus={{ boxShadow: "none" }}
               >
-                <Avatar
-                  size={"sm"}
-                  src={"https://avatars.dicebear.com/api/male/username.svg"}
-                />
-              </MenuButton>
-              <MenuList alignItems={"center"}>
-                <br />
-                <Center>
+                <HStack>
                   <Avatar
-                    size={"2xl"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    size={"sm"}
+                    src={
+                      "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                    }
                   />
-                </Center>
-                <br />
-                <Center>
-                  <p>Username</p>
-                </Center>
-                <br />
+                  <VStack
+                    display={{ base: "none", md: "flex" }}
+                    alignItems="flex-start"
+                    spacing="1px"
+                    ml="2"
+                  >
+                    <Text fontSize="sm">Justina Clark</Text>
+                    <Text fontSize="xs" color="gray.600">
+                      Admin
+                    </Text>
+                  </VStack>
+                  <Box display={{ base: "none", md: "flex" }}>
+                    <GrDown />
+                  </Box>
+                </HStack>
+              </MenuButton>
+              <MenuList
+                bg={useColorModeValue("white", "gray.900")}
+                borderColor={useColorModeValue("gray.200", "gray.700")}
+              >
+                <MenuItem>Profile</MenuItem>
+                <MenuItem>Settings</MenuItem>
+                <MenuItem>Billing</MenuItem>
                 <MenuDivider />
-                <MenuItem>Your Servers</MenuItem>
-                <MenuItem>Account Settings</MenuItem>
-                <MenuItem>Logout</MenuItem>
+                <MenuItem>Sign out</MenuItem>
               </MenuList>
             </Menu>
           </Stack>
