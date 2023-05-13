@@ -15,7 +15,17 @@ import {
   useBreakpointValue,
   useDisclosure,
   Image,
+  Menu,
+  MenuButton,
+  Avatar,
+  MenuList,
+  MenuDivider,
+  MenuItem,
+  Center,
+  useColorMode,
 } from "@chakra-ui/react";
+
+import { FaMoon, FaSun } from "react-icons/fa";
 
 import { GrMenu, GrClose, GrDown, GrLinkNext } from "react-icons/gr";
 import { NAV_ITEMS } from "../../app-data/nav-data";
@@ -23,6 +33,7 @@ import { NavItem } from "../../types";
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box>
@@ -68,7 +79,7 @@ export default function NavBar() {
           justify={"flex-end"}
           direction={"row"}
           spacing={6}
-          alignItems='center'
+          alignItems="center"
         >
           <Button
             as={"a"}
@@ -93,6 +104,44 @@ export default function NavBar() {
           >
             Зарегистрироваться
           </Button>
+          <Stack direction={"row"} spacing={7}>
+            <Button onClick={toggleColorMode} colorScheme='blue'>
+              {colorMode === "light" ? <FaMoon /> : <FaSun />}
+            </Button>
+
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
+                <Avatar
+                  size={"sm"}
+                  src={"https://avatars.dicebear.com/api/male/username.svg"}
+                />
+              </MenuButton>
+              <MenuList alignItems={"center"}>
+                <br />
+                <Center>
+                  <Avatar
+                    size={"2xl"}
+                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                  />
+                </Center>
+                <br />
+                <Center>
+                  <p>Username</p>
+                </Center>
+                <br />
+                <MenuDivider />
+                <MenuItem>Your Servers</MenuItem>
+                <MenuItem>Account Settings</MenuItem>
+                <MenuItem>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          </Stack>
         </Stack>
       </Flex>
 
