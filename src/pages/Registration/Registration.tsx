@@ -1,116 +1,111 @@
 import {
-  Avatar,
-  Button,
   Flex,
+  Box,
   FormControl,
-  FormHelperText,
   FormLabel,
-  Heading,
   Input,
   InputGroup,
+  HStack,
   InputRightElement,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
-import "./Registration.scss";
-import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { BiShow, BiHide } from "react-icons/bi";
 
-type FormValues = {
-  fullName: string;
-  email: string;
-  password: string;
-};
-
-export const Registration = () => {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
-    defaultValues: {
-      fullName: "",
-      email: "",
-      password: "",
-    },
-    mode: "onChange",
-  });
+export default function Registration() {
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Flex
-      width="100%"
-      height="100%"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
+      minH={"100vh"}
+      w="100%"
+      align="center"
+      justify="center"
+      // bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Heading as="h2" fontWeight="500" mb="30px">
-        Создание аккаунта
-      </Heading>
-      <Avatar w="90px" h="90px" mb="40px" />
-      <form  className="register__form">
-        <FormControl mb="15px">
-          <FormLabel mb="5px">Полное имя</FormLabel>
-          <Input
-            placeholder="Введите полное имя"
-            isInvalid={Boolean(errors.fullName?.message)}
-            errorBorderColor="crimson"
-            {...register("fullName", { required: "Укажите полное имя" })}
-          />
-          <FormHelperText color="crimson">
-            {errors.fullName?.message}
-          </FormHelperText>
-        </FormControl>
-        <FormControl mb="15px">
-          <FormLabel mb="5px">Почта</FormLabel>
-          <Input
-            placeholder="Введите почту"
-            isInvalid={Boolean(errors.email?.message)}
-            errorBorderColor="crimson"
-            {...register("email", { required: "Укажите почту" })}
-            type="email"
-          />
-          <FormHelperText color="crimson">
-            {errors.email?.message}
-          </FormHelperText>
-        </FormControl>
-
-        <FormControl mb="30px">
-          <FormLabel mb="5px">Пароль</FormLabel>
-          <InputGroup size="md">
-            <Input
-              pr="4.5rem"
-              // type={show ? "text" : "password"}
-              placeholder="Введите пароль"
-              isInvalid={Boolean(errors.password?.message)}
-              errorBorderColor="crimson"
-              {...register("password", { required: "Укажите пароль" })}
-            />
-            <InputRightElement width="4.5rem">
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"} textAlign={"center"}>
+            Зарегистрироваться
+          </Heading>
+          <Text fontSize={"lg"} color={"gray.600"} textAlign={"center"}>
+            чтобы насладиться всеми нашими интересными функциями ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <HStack>
+              <Box>
+                <FormControl id="firstName" isRequired>
+                  <FormLabel>Имя</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl id="lastName">
+                  <FormLabel>Фамилия</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+            </HStack>
+            <FormControl id="email" isRequired>
+              <FormLabel>Почта</FormLabel>
+              <Input type="email" />
+            </FormControl>
+            <FormControl id="password" isRequired>
+              <FormLabel>Пароль</FormLabel>
+              <InputGroup>
+                <Input type={showPassword ? "text" : "password"} pr="55px" />
+                <InputRightElement w="40px" h="100%">
+                  <Button
+                    w="40px"
+                    h="100%"
+                    p="0"
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
+                  >
+                    {showPassword ? (
+                      <BiShow size="18px" />
+                    ) : (
+                      <BiHide size="18px" />
+                    )}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Stack spacing={10} pt={2}>
               <Button
-                h="1.75rem"
-                size="sm"
-    
-                background="transparent"
+                loadingText="Submitting"
+                size="lg"
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
               >
-                {/* {show ? <BiShow size="18px" /> : <BiHide size="18px" />} */}
+                Зарегистироваться
               </Button>
-            </InputRightElement>
-          </InputGroup>
-          <FormHelperText color="crimson">
-            {errors.password?.message}
-          </FormHelperText>
-        </FormControl>
-        <Button disabled={!isValid} type="submit">
-          Зарегистрироваться
-        </Button>
-      </form>
-
-      <Heading as="h3" fontWeight="400" fontSize="18px" mt="50px">
-        Уже зарегистрированы?{" "}
-        <Link to="/login" style={{ color: "#0077ff" }}>
-          Войти
-        </Link>
-      </Heading>
+            </Stack>
+            <Stack pt={6}>
+              <Text align={"center"}>
+                Есть аккаунт? <Link color={"blue.400"}>Войти</Link>
+              </Text>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
     </Flex>
   );
-};
+}
