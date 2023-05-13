@@ -25,6 +25,8 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
+import { Route, Link as RouterLink } from "react-router-dom";
+
 import { FaMoon, FaSun } from "react-icons/fa";
 
 import { GrMenu, GrClose, GrDown, GrLinkNext } from "react-icons/gr";
@@ -60,7 +62,14 @@ export default function NavBar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image src="/src/assets/img/icon.png" alt="icon" w="50px" h="50px" />
+          <RouterLink to="/">
+            <Image
+              src="/src/assets/img/icon.png"
+              alt="icon"
+              w="50px"
+              h="50px"
+            />
+          </RouterLink>
           {/* <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
@@ -88,7 +97,7 @@ export default function NavBar() {
             variant={"link"}
             href={"#"}
           >
-            Войти
+            <RouterLink to="/login"> Войти</RouterLink>
           </Button>
           <Button
             as={"a"}
@@ -102,10 +111,17 @@ export default function NavBar() {
               bg: "blue.300",
             }}
           >
-            Зарегистрироваться
+            <RouterLink to="/register"> Зарегистрироваться</RouterLink>
           </Button>
           <Stack direction={"row"} spacing={7}>
-            <Button onClick={toggleColorMode} colorScheme='blue'>
+            <Button
+              onClick={toggleColorMode}
+              color={"white"}
+              bg={"blue.400"}
+              _hover={{
+                bg: "blue.300",
+              }}
+            >
               {colorMode === "light" ? <FaMoon /> : <FaSun />}
             </Button>
 
