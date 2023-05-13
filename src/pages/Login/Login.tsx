@@ -1,89 +1,70 @@
 import {
-  Button,
   Flex,
-  Input,
-  Heading,
+  Box,
   FormControl,
   FormLabel,
-  FormHelperText,
-  InputGroup,
-  InputRightElement,
+  Input,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { BiHide, BiShow } from "react-icons/bi";
-import "./Login.scss";
+import {Link} from 'react-router-dom'
 
-type FormValues = {
-  email: string;
-  password: string;
-};
-
-export const Login = () => {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    mode: "onChange",
-  });
-
+export default function Login() {
   return (
     <Flex
-      width="100%"
-      height="100%"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
+      minH={"100vh"}
+      w="100%"
+      align={"center"}
+      justify={"center"}
+      // bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Heading as="h2" fontWeight="500" mb="30px">
-        Вход в аккаунт
-      </Heading>
-      <form  className="login__form">
-        <FormControl mb="15px">
-          <FormLabel mb="5px">Почта</FormLabel>
-          <Input
-            placeholder="Введите почту"
-            isInvalid={Boolean(errors.email?.message)}
-            errorBorderColor="crimson"
-            {...register("email", { required: "Укажите почту" })}
-            type="email"
-          />
-          <FormHelperText>{errors.email?.message}</FormHelperText>
-        </FormControl>
-        <FormControl mb="25px">
-          <FormLabel mb="5px">Пароль</FormLabel>
-
-          <InputGroup size="md">
-            <Input
-              pr="4.5rem"
-              // type={show ? "text" : "password"}
-              errorBorderColor="crimson"
-              placeholder="Введите пароль"
-              isInvalid={Boolean(errors.password?.message)}
-              {...register("password", { required: "Укажите пароль" })}
-            />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                background="transparent"
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Войдите в свой аккаунт</Heading>
+          <Text fontSize={"lg"} color={"gray.600"} textAlign="center">
+            чтобы насладиться всеми нашими интересными
+            <Link to="/" style={{ color: "#4299E1" }}> функциями</Link> ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <FormControl id="email">
+              <FormLabel>Почта</FormLabel>
+              <Input type="email" />
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Пароль</FormLabel>
+              <Input type="password" />
+            </FormControl>
+            <Stack spacing={5}>
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                align={"start"}
+                justify={"flex-end"}
               >
-                {/* {show ? <BiShow size="18px" /> : <BiHide size="18px" />} */}
+                <Link to="/" style={{ color: "#4299E1" }}>Забыли пароль?</Link>
+              </Stack>
+              <Button
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              >
+                Войти
               </Button>
-            </InputRightElement>
-          </InputGroup>
-
-          <FormHelperText>{errors.password?.message}</FormHelperText>
-        </FormControl>
-        <Button disabled={!isValid} type="submit" colorScheme="blue">
-          Войти
-        </Button>
-      </form>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
     </Flex>
   );
-};
+}

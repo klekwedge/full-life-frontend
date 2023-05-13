@@ -12,8 +12,8 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 
@@ -34,7 +34,8 @@ export default function Registration() {
             Зарегистрироваться
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"} textAlign={"center"}>
-            чтобы насладиться всеми нашими интересными функциями ✌️
+            чтобы насладиться всеми нашими интересными
+            <Link to="/" style={{ color: "#4299E1" }}> функциями</Link> ✌️
           </Text>
         </Stack>
         <Box
@@ -100,7 +101,10 @@ export default function Registration() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Есть аккаунт? <Link color={"blue.400"}>Войти</Link>
+                Есть аккаунт?{" "}
+                <Link to="/login" style={{ color: "#4299E1" }}>
+                  Войти
+                </Link>
               </Text>
             </Stack>
           </Stack>

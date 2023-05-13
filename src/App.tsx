@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
-import { Login } from "./pages/Login/Login";
+import Login from "./pages/Login/Login";
 import  Registration  from "./pages/Registration/Registration";
 import { Container, Flex } from "@chakra-ui/react";
 
