@@ -38,10 +38,14 @@ export default function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box>
+    <Box
+      bg={useColorModeValue("white", "gray.800")}
+      color={useColorModeValue("gray.600", "white")}
+    >
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
+        maxWidth="1200px"
+        m="0 auto"
+        p="0px 20px"
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
