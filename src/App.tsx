@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Login, Registration, ForgotPassword, Page404 } from "./pages";
 import { Box, Container, Flex } from "@chakra-ui/react";
-import NavBar from "./components/NavBar/NavBar";
+// import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Container
         maxWidth="1200px"
         m="0 auto"
